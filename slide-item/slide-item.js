@@ -32,12 +32,14 @@ Component({
      */
     touchEnd: function (e) {
       let touchEndPageX = e.changedTouches[0].pageX,
+        // 获取滑动的距离，正代表右滑，负代表左滑
         offSetStartToEnd = touchEndPageX - this.data.touchStartPageX;
+      // 滑动距离小于10px则不生效
       if (offSetStartToEnd < 10 && offSetStartToEnd > -10) {
         return;
       };
       if (offSetStartToEnd > 10) {
-        if (this.data.scrollLeft === 0 || offSetStartToEnd >= 100) {
+        if (this.data.scrollLeft === 0) {
           return;
         }
         this.setData({
@@ -45,11 +47,8 @@ Component({
         });
       };
       if (offSetStartToEnd < -10) {
-        if (offSetStartToEnd <= -100) {
-          return;
-        }
         this.setData({
-          scrollLeft: 100,
+          scrollLeft: 100, // 当滑动未到底时，通过设置scrollLeft为你需要显示的按钮的宽度，来让其自动到达底部
         })
       }
     }
