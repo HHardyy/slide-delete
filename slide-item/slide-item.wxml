@@ -1,0 +1,13 @@
+<!--components/slide-item/slide-item.wxml-->
+<view class="classify-item">
+  <scroll-view scroll-x="true" catch:touchstart="touchStart" catch:touchend="touchEnd" scroll-with-animation="true" scroll-left="{{scrollLeft}}" >
+    <view class="item-width">
+      <view class="item-content">
+        <slot></slot>
+      </view>
+      <view class="item-delete">
+        <view style='font-size:16px;'>删除</view>
+      </view>
+    </view>
+  </scroll-view>
+</view>

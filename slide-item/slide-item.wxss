@@ -1,0 +1,34 @@
+/* components/slide-item/slide-item.wxss */
+@import '/src/iconfont.wxss';
+
+/* 内容样式 */
+.classify-item {
+  font-size: 14px;
+  color: #999999;
+}
+.classify-item .item-width {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: calc(750rpx + 100px);
+  height: 100%;
+}
+.classify-item .item-content {
+  background: white;
+  box-sizing: border-box;
+  width: 750rpx;
+  padding: 5px 0 5px 10px;
+}
+/* 删除按钮样式 */
+.classify-item .item-delete {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  right: 0;
+  width: 100px;
+  height: 100%;
+  background: #dc3545;
+  border-left: 1px solid #ccc;
+  color: white;
+}
