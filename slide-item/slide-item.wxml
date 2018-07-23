@@ -1,12 +1,14 @@
-<!--components/slide-item/slide-item.wxml-->
 <view class="classify-item">
-  <scroll-view scroll-x="true" catch:touchstart="touchStart" catch:touchend="touchEnd" scroll-with-animation="true" scroll-left="{{scrollLeft}}" >
-    <view class="item-width">
-      <view class="item-content">
+  <scroll-view scroll-x="true" catch:touchstart="_touchStart" catch:touchend="_touchEnd" scroll-with-animation="true" scroll-left="{{scrollLeft}}">
+    <view class="item-width {{isNeedAddClassifyButton ? 'width-change' : ''}}">
+      <view class="item-content ">
         <slot></slot>
       </view>
-      <view class="item-delete">
-        <view style='font-size:16px;'>删除</view>
+      <view class="item-classify" wx:if="{{isNeedAddClassifyButton}}" bind:touchend="_setTouchEnd">
+        <text style='font-size: 16px;'>设置</text>
+      </view>
+      <view class="item-delete" bind:touchend="_deleteTouchEnd">
+        <text style='font-size: 16px;'>删除</text>
       </view>
     </view>
   </scroll-view>

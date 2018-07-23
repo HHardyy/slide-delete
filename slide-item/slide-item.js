@@ -4,7 +4,10 @@ Component({
    * 组件的属性列表
    */
   properties: {
-
+    isNeedAddClassifyButton: {
+      type: Boolean,
+      value: false
+    }
   },
 
   /**
@@ -20,9 +23,9 @@ Component({
    */
   methods: {
     /**
-   * 手指触摸开始
-   */
-    touchStart: function (e) {
+     * 手指触摸开始
+     */
+    _touchStart: function (e) {
       this.setData({
         touchStartPageX: e.changedTouches[0].pageX,
       })
@@ -30,27 +33,45 @@ Component({
     /**
      * 手指触摸结束
      */
-    touchEnd: function (e) {
+    _touchEnd: function (e) {
       let touchEndPageX = e.changedTouches[0].pageX,
-        // 获取滑动的距离，正代表右滑，负代表左滑
         offSetStartToEnd = touchEndPageX - this.data.touchStartPageX;
-      // 滑动距离小于10px则不生效
-      if (offSetStartToEnd < 10 && offSetStartToEnd > -10) {
+      if (offSetStartToEnd < 10 & offSetStartToEnd > -10) {
         return;
       };
       if (offSetStartToEnd > 10) {
-        if (this.data.scrollLeft === 0) {
-          return;
-        }
+        if(this.data.scrollLeft === 0) return;
         this.setData({
           scrollLeft: 0,
         });
       };
       if (offSetStartToEnd < -10) {
         this.setData({
-          scrollLeft: 100, // 当滑动未到底时，通过设置scrollLeft为你需要显示的按钮的宽度，来让其自动到达底部
+          scrollLeft: this.data.isNeedAddClassifyButton ? 120 : 60,
         })
       }
-    }
+    },
+    /**
+     * 点击删除按钮
+     */
+    _deleteTouchEnd: function(e) {
+      let touchEndPageX = e.changedTouches[0].pageX,
+        offSetStartToEnd = touchEndPageX - this.data.touchStartPageX;
+      if (offSetStartToEnd < 10 & offSetStartToEnd > -10) {
+        this.triggerEvent('delete', {});
+      };
+      return;
+    },
+    /**
+     * 点击设置按钮
+     */
+    _setTouchEnd: function (e) {
+      let touchEndPageX = e.changedTouches[0].pageX,
+        offSetStartToEnd = touchEndPageX - this.data.touchStartPageX;
+      if (offSetStartToEnd < 10 & offSetStartToEnd > -10) {
+        this.triggerEvent('set', {});
+      };
+      return;
+    },
   }
 })
